@@ -1,4 +1,4 @@
-<?php /*a:1:{s:64:"C:\xampp\htdocs\ggshop06\application\admin\view\login\login.html";i:1630074434;}*/ ?>
+<?php /*a:1:{s:64:"C:\xampp\htdocs\ggshop06\application\admin\view\login\login.html";i:1630074466;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,7 +14,7 @@ body {
 
 </head>
 <body style="background: #278296">
-<form method="post" action="privilege.php" name='theForm'>
+<form method="post" action="" name='theForm'>
   <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
   <tr>
     <td><img src="/static/admin/images/login.png" width="178" height="256" border="0" alt="ECSHOP" /></td>
