@@ -3,6 +3,6 @@
 *.log
 .env
 .DS_Store
-runtime/
-nbproject/
-config/database.php
+/runtime/
+/nbproject/
+/config/database.php
