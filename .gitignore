@@ -5,4 +5,4 @@
 .DS_Store
 /runtime
 /nbproject
-/config/database.php
+./config/database.php
