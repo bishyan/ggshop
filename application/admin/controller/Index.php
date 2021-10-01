@@ -17,7 +17,8 @@ class Index extends Privilege
     
     public function menu()
     {
-        $this->assign('menuList', []);
+        
+        $this->assign('menuList', array_nested($this->privileges, 'menu_id'));
         return $this->fetch();
     }
     

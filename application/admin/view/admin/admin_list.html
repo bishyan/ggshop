@@ -1,0 +1,60 @@
+{include file="public/header" /}
+<body>
+
+<h1>
+<span class="action-span"><a href="{:url('add')}">添加管理员</a></span>
+<span class="action-span1"><a href="index.php?p=admin&c=index&a=index">SHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 管理员列表 </span>
+<div style="clear:both"></div>
+</h1>
+
+<form method="post" action="" name="listForm">
+
+	<div class="list-div" id="listDiv">
+		<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+			<tbody>
+				<tr>
+					<th>ID</th>
+					<th>管理员名称</th>
+					<th>所属角色</th>
+					<th>email</th>	
+					<th>是否启用</th>
+					<th>操作</th>
+				</tr>
+                            {foreach $adminList as $val}
+				<tr align="center">
+                                        <td width="10%">{$val.admin_id}</td>
+					<td width="20%" align="left" class="first-cell">
+						{$val.admin_name}
+					 </td>
+					<td width="15%">{$val.role_name}</td>
+					<td width="20%">{$val.email}</td>
+
+					<td width="10%">
+                                            {if condition="$val['is_use'] == 1"}
+                                            <img src="__IMG__/yes.gif" />
+                                            {else/}
+                                            <img src="__IMG__/no.gif" />
+                                            {/if}
+                                        </td>
+			
+					<td width="15%" align="center">
+						
+                                            <a href="{:url('edit', ['admin_id' => $val['admin_id']])}">编辑</a> |
+						<a href="{:url('del', ['admin_id' => $val['admin_id']])}" onclick="return confirm('您确认要删除这条记录吗?')" title="移除">移除</a>
+					</td>
+				</tr>
+                                {/foreach}
+	</tbody>
+  </table>
+</div>
+</form>
+
+  </table>
+</div>
+</form>
+
+
+{include file="public/footer1" /}
+
+</body>
+</html>

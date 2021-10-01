@@ -1,0 +1,76 @@
+{include file="public/header" /}
+<body>
+
+<h1>
+<span class="action-span"><a href="{:url('index')}">菜单列表</a></span>
+<span class="action-span1"><a href="index.php?act=main">SHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 添加菜单 </span>
+<div style="clear:both"></div>
+</h1>
+<!-- start add new category form -->
+<div class="main-div">
+  <form action="" method="post" name="theForm" enctype="multipart/form-data">
+	 <table width="100%" id="general-table">
+		<tbody>
+			<tr>
+				<td class="label">菜单名称:</td>
+				<td><input type="text" name="menu_name" maxlength="20" value="" size="27" /> <font color="red">*</font></td>
+			</tr>
+			<tr>
+				<td class="label">上级菜单:</td>
+				<td>
+					<select name="pid">
+						<option value="0">顶级菜单</option>
+                                                {foreach $menuList as $val}
+						<option value="{$val.menu_id}">{$val.deep|str_repeat='--- ',###}{$val.menu_name}</option>
+						{/foreach}
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="label">控制器:</td>
+				<td><input type="text" name="ctl" value="" size="18" /></td>
+			</tr>
+                    
+                        <tr>
+				<td class="label">方法:</td>
+				<td><input type="text" name="act" value="" size="18" /></td>
+			</tr>
+                    
+			<tr>
+				<td class="label">排序:</td>
+				<td><input type="text" name="sort_order" value="20" size="15" /></td>
+			</tr>
+
+			<tr>
+				<td class="label">是否作为菜单显示:</td>
+				<td>
+                                    <input type="radio" name="status" value="1" checked="true" /> 是
+                                    <input type="radio" name="status" value="0" /> 否 
+                                </td>
+			</tr>
+                        <tr>
+				<td class="label">是否启用菜单:</td>
+				<td>
+                                    <input type="radio" name="is_use" value="1" checked="true" /> 是
+                                    <input type="radio" name="is_use" value="0" /> 否 
+                                </td>
+			</tr>
+      
+      </tbody></table>
+      <div class="button-div">
+        <input type="submit" value=" 确定 ">
+        <input type="reset" value=" 重置 ">
+      </div>
+
+  </form>
+</div>
+
+
+
+{include file="public:footer" /}
+
+</div>
+
+</body>
+</html>

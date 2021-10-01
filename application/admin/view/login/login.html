@@ -21,7 +21,7 @@ body {
       <table>
       <tr>
         <td>管理员姓名：</td>
-        <td><input type="text" name="username" /></td>
+        <td><input type="text" name="admin_name" /></td>
       </tr>
       <tr>
         <td>管理员密码：</td>
@@ -32,7 +32,8 @@ body {
         <td><input type="text" name="captcha" class="capital" /></td>
       </tr>
       <tr>
-      <td colspan="2" align="right"><img src="#" width="145" height="20" alt="CAPTCHA" border="1" onclick= this.src="index.php?act=captcha&"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+      <td colspan="2" align="right">
+          <img src="{:url('Common/captcha')}"  alt="CAPTCHA" border="1" onclick="this.src='{:url(\'Common/captcha\')}'+ '?' + Math.random();" style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
       </td>
       </tr>
       <tr><td colspan="2"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">请保存我这次的登录信息</label></td></tr>

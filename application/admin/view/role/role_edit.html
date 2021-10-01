@@ -1,0 +1,180 @@
+{include file="public/header" /}
+<body>
+
+    <h1>
+        <span class="action-span"><a href="{:url('index')}">角色列表</a></span>
+        <span class="action-span1"><a href="index.php?act=main">SHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 编辑角色 </span>
+        <div style="clear:both"></div>
+    </h1>
+    <!-- start add new category form -->
+    <div class="main-div">
+        <form action="" method="post" name="theForm" enctype="multipart/form-data">
+            <table width="100%" id="general-table">
+                <tbody>
+                    <tr>
+                        <td class="label">角色名称:</td>
+                        <td><input type="text" name="role_name" maxlength="20" value="{$roleInfo.role_name}" size="27"> <font color="red">*</font></td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="label">角色描述:</td>
+                        <td>
+                            <textarea name="role_desc" rows="6" cols="48">{$roleInfo.role_desc}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">给角色分配权限:</td>
+                        <td>
+                            {foreach $menuList as $menu}
+
+                            <div class="menu-list">
+                                <div class="title">
+                                    <h3>
+                                        {if condition="in_array($menu['menu_id'], $act_list)"}
+                                        <input type="checkbox" name="menu_id[]" value="{$menu.menu_id}" checked />
+                                        {else/}
+                                        <input type="checkbox" name="menu_id[]" value="{$menu.menu_id}" />
+                                        {/if}
+                                        {$menu.menu_name}
+                                        
+                                    </h3>
+                                </div>
+
+                                <div class="item-box">
+                                    {foreach name="$menu['son']" item="son"}
+                                    <dl>
+                                        <dt>
+                                        {if condition="in_array($son['menu_id'], $act_list)"}
+                                        <input type="checkbox" name="menu_id[]" pid="{$son.pid}" value="{$son.menu_id}" checked />
+                                        {else/}
+                                        <input type="checkbox" name="menu_id[]" pid="{$son.pid}" value="{$son.menu_id}" />
+                                        {/if}
+                                        {$son.menu_name}
+                                        </dt>
+                                        <div class="dd-item">
+
+                                            {foreach $son['son'] as $grandson}
+                                            <dd>
+                                                {if condition="in_array($grandson['menu_id'], $act_list)"}
+                                                <input type="checkbox" pid="{$grandson.pid}" name="menu_id[]" value="{$grandson.menu_id}" checked />
+                                                {else/}
+                                                <input type="checkbox" pid="{$grandson.pid}" name="menu_id[]" value="{$grandson.menu_id}" />
+                                                {/if}
+                                                {$grandson.menu_name}
+                                            </dd>
+                                            {/foreach}
+                                        </div>
+                                    </dl>
+                                    {/foreach}
+                                </div>
+                            </div>
+
+                            {/foreach}
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div class="button-div">
+                <input type="submit" value=" 确定 ">
+                <input type="reset" value=" 重置 ">
+            </div>
+
+            <input type="hidden" name="role_id" value="{$roleInfo.role_id}" />
+        </form>
+    </div>
+
+    <style>
+        dl,dt,dd,h3 {
+            padding:0;
+            margin:0;
+        }
+        .menu-list {
+            padding: 15px 0;
+            width: 650px;
+            overflow: hidden;
+            border-top: 1px solid #ccc;
+        }
+
+        .menu-list:first-child {
+            border:0;
+        }
+
+        .menu-list .title,  .menu-list .item-box {
+            float: left;
+        }
+
+        .menu-list .title {
+            width: 100px;
+            border-right: 1px solid #000;
+        }
+
+        .menu-list .item-box {
+            width: 500px;
+        }
+        .menu-list .item-box dl {
+            float: left;
+            width: 100%;
+        }
+
+        .menu-list .item-box .dd-item {
+            float: left;
+            padding-left: 15px;
+        }
+
+        .item-box  dt {
+            float: left;
+            width: 100px;
+            padding-left: 15px;
+            border-right: 1px solid #000;
+            margin-bottom: 10px;
+        }
+
+        .menu-list .item-box .dd-item dd {
+            float: left;
+            width: 100px;
+        }
+    </style>
+
+    <script>
+        $(".menu-list .title").find(':checkbox').change(function () {
+
+            var that = this;
+            $(this).parent().parent().next().find(':checkbox').each(function (i, e) {
+                $(e).prop('checked', $(that).prop('checked'));
+            });
+        });
+
+        $(".item-box dt").find(':checkbox').change(function () {
+            var that = this;
+            $(this).parent().next().find(':checkbox').each(function (i, e) {
+                $(e).prop('checked', $(that).prop('checked'));
+            });
+
+            checkPid(this);
+        });
+
+        $(".dd-item").find(":checkbox").change(function () {
+            checkPid(this);
+        });
+
+        function checkPid(obj) {
+            var pid = $(obj).attr('pid');
+            $(".menu-list").find(':checkbox').each(function (i, e) {
+                if ($(e).val() == pid) {
+                    $(e).prop("checked", true);
+                    if ($(e).attr('pid') > 0) {
+                        checkPid(e);
+                    }
+                }
+            });
+        }
+    </script>
+
+
+    {include file="public/footer"}
+
+
+</body>
+</html>

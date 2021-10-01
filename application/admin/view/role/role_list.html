@@ -1,0 +1,49 @@
+{include file="public/header" /}
+<body>
+
+<h1>
+<span class="action-span"><a href="{:url('add')}">添加角色</a></span>
+<span class="action-span1"><a href="index.php?p=admin&c=index&a=index">SHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 角色列表 </span>
+<div style="clear:both"></div>
+</h1>
+
+<form method="post" action="" name="listForm">
+<!-- start ad position list -->
+	<div class="list-div" id="listDiv">
+		<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+			<tbody>
+				<tr>
+					<th>ID</th>
+					<th>角色名称</th>
+					<th>权限id列表</th>
+					<th>描述</th>
+					<th>操作</th>
+				</tr>
+                            {volist name="$roleList" id="role"}
+				<tr>
+		
+					<td width="6%" align="center">{$role.role_id}</td>
+					<td width="30%">{$role.role_name}</td>
+					<td width="30%">{$role.act_list}</td>
+					<td width="20%">{$role.role_desc}</td>
+					<td width="20%" align="center">
+                                            <a href="{:url('edit', ['role_id'=> $role['role_id']])}">编辑</a> |	
+                                            <a href="{:url('del', ['role_id'=> $role['role_id']])}" onclick="return confirm('您确认要删除这条记录吗?')" title="移除">移除</a>
+					</td>
+				</tr>
+                            {/volist}
+	
+	</tbody>
+  </table>
+</div>
+</form>
+
+  </table>
+</div>
+</form>
+
+
+{include file="public/footer1" /}
+ 
+</body>
+</html>
